@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
 
   public $myMusicalBoxList: Observable<Array<MusicalBox>>;
   public $publicMusicalBoxList: Observable<Array<MusicalBox>>;
-  
+
   constructor(
     private databaseService: DatabaseService
   ){}
@@ -26,17 +26,17 @@ export class AppComponent implements OnInit {
 
   private getNewBox(): MusicalBox {
     return {
-      name: "My Musical Box",
+      name: 'My Musical Box',
       public: true,
-      data: new Array(10).fill(new Array(40).fill(false)),
+      data: new Array(7).fill(new Array(25).fill(false)),
       id: null
     }
   }
 
   // Save new NewBox to DB
   public updateBox(newBox) {
-    this.databaseService.$updateBox(newBox).subscribe((response: any)=>{
-      if(response.success) {
+    this.databaseService.$updateBox(newBox).subscribe((response: any) => {
+      if (response.success) {
         this.box = response.success.box;
       } else {
         console.log(response);
@@ -46,9 +46,9 @@ export class AppComponent implements OnInit {
 
   // Create a new box and save it to DB
   public addBox() {
-    let newBox = this.getNewBox();
-    this.databaseService.$addBox(newBox).subscribe((response: any)=>{
-      if(response.success) {
+    const newBox = this.getNewBox();
+    this.databaseService.$addBox(newBox).subscribe((response: any) => {
+      if (response.success) {
         this.box = response.success.box;
       } else {
         console.log(response);

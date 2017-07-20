@@ -5,7 +5,7 @@
     <app-authentication></app-authentication>
     <h3 md-subheader *ngIf="($myMusicalBoxList | async).length > 0">My Music</h3>
     <app-musical-box-list [musicalBoxList]="$myMusicalBoxList | async" (selectBox)="selectMyBox($event)"></app-musical-box-list>
-    <h3 md-subheader *ngIf="($publicMusicalBoxList | async).legnth > 0">Public Music</h3>
+    <h3 md-subheader *ngIf="($publicMusicalBoxList | async).length > 0">Public Music</h3>
     <app-musical-box-list [musicalBoxList]="$publicMusicalBoxList | async" (selectBox)="selectPublicBox($event)"></app-musical-box-list>
   </md-sidenav>
 

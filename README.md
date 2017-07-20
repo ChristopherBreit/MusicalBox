@@ -2,37 +2,127 @@
 
 This is a simple Angular Project game called MusicalBox. You can check it out here:
 
-## Create UI
-ng generate component musicalBoxList
-ng generate component musicalBox
+## Progressive Web Apps
+
+You can checkout branch `pwa`
+
+### Service Worker
+Install the dependencies:
+```
+npm install --save @angular/service-Worker
+```
+!Temporary bug: https://github.com/angular/angular-cli/issues/6990
+`"@angular/cli": "1.0.3"`
+
+Add servie worker to your .angular-cli.json:
+```
+"apps": [
+    {
+        ...
+        "serviceWorker": true,
+        ...
+```
+
+You can checkout branch `pwa-1`
+
+### Manifest file
+Create a `manifest.json` file and save it in your assets folder.
+You can use a generator such as: https://app-manifest.firebaseapp.com/
+
+Add this to your `index.html`
+`<link rel="manifest" href="assets/manifest.json">`
+
+You can checkout branch `pwa-2`
+
+## Angular Material
+
+## Setup Angular Material
+
+Install the dependencies:
+```
+npm install --save @angular/material @angular/cdk @angular/animations
+```
+
+Include the modules in your app:
+```
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MaterialModule} from '@angular/material';
+
+@NgModule({
+  ...
+  imports: [
+      MaterialModule,
+      BrowserAnimationsModule,
+      ...
+  ],
+  ...
+})
+```
+
+Include a theme. Add this a new file theme.scss:
+```
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue.
+$candy-app-primary: mat-palette($mat-indigo);
+$candy-app-accent:  mat-palette($mat-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$candy-app-warn:    mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($candy-app-theme);
+```
+Make sure to include this new thme in your .angular-cli:
+```
+...
+"styles": [
+    "styles.css",
+    "theme.scss"
+],
+...
+```
+
+## Adding all the components!!
+
+# AngularFire
+
+## Setup dependencies
+```
+npm install --save firebase angularfire2
+```
+
+! Temporary bug: https://github.com/angular/angularfire2/issues/1055
+`npm install promise-polyfill --save-exact`
 
 
-# Resources:
+Include the moduels:
+```
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.1.1.
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-
+@NgModule({
+  ...
+  imports: [
+      AngularFireModule.initializeApp(secrets.firebaseConfig)
+      AngularFireDatabaseModule,
+      AngularFireAuthModule
+      ...
+  ],
+  ...
+})
+```

@@ -30,7 +30,8 @@ export class AuthenticationDialogComponent implements OnInit {
     this.authenticationService.$login(this.email, this.password).subscribe((result) => {
       if (result.error) {
         this.error = result.error
-      } else {
+      }
+      if (result.success) {
         this.mdDialogRef.close();
       }
       this.loading = false;
@@ -44,7 +45,8 @@ export class AuthenticationDialogComponent implements OnInit {
     this.authenticationService.$register(this.email, this.password).subscribe((result) => {
       if (result.error) {
         this.error = result.error
-      } else {
+      }
+      if (result.success) {
         this.mdDialogRef.close();
       }
       this.loading = false;
